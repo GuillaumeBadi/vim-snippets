@@ -1,0 +1,148 @@
+global !p
+def capscore(t):
+	return '_'.join([ w.upper() for w in re.findall('[A-Z]+[a-z]*', t) ])
+
+def lowerdash(t):
+	return '-'.join([ w.lower() for w in re.findall('[a-z]+|[A-Z]+[a-z]*', t) ])
+endglobal
+
+# Normal javascript snippets
+#
+snippet imp "Import a lib" b
+import $1 from '$2`!p snip.rv=lowerdash(t[1])`'
+endsnippet
+
+snippet impf "Import a file" b
+import $1 from '${2:./}${3:$1}'
+endsnippet
+
+snippet impn "Import nested" b
+import { $1 } from '$2'
+endsnippet
+
+snippet impp "Import without from" b
+import '$1'
+endsnippet
+
+snippet icn "Import classnames" b
+import cn from 'classnames'
+endsnippet
+
+snippet cl "Console.log" b
+console.log($1)
+endsnippet
+
+snippet clv "Console log variable" b
+console.log('$1:', $1)
+endsnippet
+
+snippet exp "Export from location" b
+export $1 from '${2:./}$1'
+endsnippet
+
+snippet expn "Export nested" b
+export { $1 } from '${2:./}'
+endsnippet
+
+snippet expd "Export default" b
+export ${4:default} $1
+endsnippet
+
+# ==========================================
+# React Snippets
+#
+snippet rce "React class exported" b
+import React, { Component } from 'react'
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+
+	render () {
+
+		return (
+			${2:<div />}
+		)
+	}
+}
+
+export default $1
+endsnippet
+
+snippet rfe "React function exported" b
+import React from 'react'
+
+export default function `!v expand('%:t:r')`($2) {
+
+	return (
+		${3:<div>
+		</div>}
+	)
+}
+endsnippet
+
+snippet rpe "React pure export" b
+import React, { PropTypes } from 'react'
+
+const `!v expand('%:t:r')` = (${1:props}) => (
+	<div${2}>
+	</div>
+)
+
+export default `!v expand('%:t:r')`
+endsnippet
+
+snippet rcf "React class function" b
+$1 = (${2:e}) => {
+	$3
+}
+endsnippet
+
+# ==========================================
+# Component Specs and Lifecycle Section
+#
+snippet dp "get default props" b
+static defaultProps = {
+	$1
+}
+endsnippet
+
+snippet cwm "component will mount" b
+componentWillMount () {
+	$1
+}
+endsnippet
+
+snippet cdm "component did mount" b
+componentDidMount () {
+	$1
+}
+endsnippet
+
+snippet cwrp "component will receive props" b
+componentWillReceiveProps (nextProps) {
+	$1
+}
+endsnippet
+
+snippet scu "should component update" b
+shouldComponentUpdate (nextProps, nextState) {
+	return $1
+}
+endsnippet
+
+snippet cwu "component will update" b
+componentWillUpdate (nextProps, nextState) {
+	$3
+}
+endsnippet
+
+snippet cdu "component did update" b
+componentDidUpdate (prevProps, prevState) {
+	$1
+}
+endsnippet
+
+snippet cwum "component will unmount" b
+componentWillUnmount () {
+	$1
+}
+endsnippet
