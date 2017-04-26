@@ -3,7 +3,8 @@ def capscore(t):
 	return '_'.join([ w.upper() for w in re.findall('[A-Z]+[a-z]*', t) ])
 
 def lowerdash(t):
-	return '-'.join([ w.lower() for w in re.findall('[a-z]+|[A-Z]+[a-z]*', t) ])
+	match = re.findall('[a-z]+|[A-Z]+[a-z]*', t.split(',')[0])
+	return '-'.join([ w.lower() for w in match ])
 endglobal
 
 # Normal javascript snippets
@@ -28,11 +29,11 @@ snippet icn "Import classnames" b
 import cn from 'classnames'
 endsnippet
 
-snippet cl "Console.log" b
+snippet cl "Console.log"
 console.log($1)
 endsnippet
 
-snippet clv "Console log variable" b
+snippet clv "Console log variable"
 console.log('$1:', $1)
 endsnippet
 
@@ -48,6 +49,32 @@ snippet expd "Export default" b
 export ${4:default} $1
 endsnippet
 
+snippet fn "Function" i
+function ${1:name}($2) {$3}
+endsnippet
+
+snippet ar "Arrow function" i
+($1) => {$2}
+endsnippet
+
+snippet const "Constant definition"
+const ${1} = ${2}
+endsnippet
+
+snippet let "Variable definition" b
+let ${1} = ${2}
+endsnippet
+
+snippet prom "new Promise" i
+new Promise((resolve, reject) => {$1})
+endsnippet
+
+snippet com "Comment" b
+/**
+ * $1
+ */
+endsnippet
+
 # ==========================================
 # React Snippets
 #
@@ -59,7 +86,7 @@ class ${1:`!v expand('%:t:r')`} extends Component {
 	render () {
 
 		return (
-			${2:<div />}
+			${2:<div></div>}
 		)
 	}
 }
